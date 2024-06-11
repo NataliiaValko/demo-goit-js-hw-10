@@ -23,7 +23,20 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates);
+    if (!selectedDates[0] || selectedDates[0] <= options.defaultDate) {
+      iziToast.show({
+        title: 'Error',
+        message: 'Please choose a date in the future!',
+        position: 'topRight',
+        titleColor: 'white',
+        messageColor: 'white',
+        backgroundColor: 'red',
+      });
+      refs.btnStart.disabled = true;
+      return;
+    }
+    refs.btnStart.disabled = false;
+    userDate = selectedDates[0];
   },
 };
 
